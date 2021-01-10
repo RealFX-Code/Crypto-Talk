@@ -2,6 +2,7 @@ import os
 import PySimpleGUI as sg
 from cryptography.fernet import Fernet
 
+# Make Custon Theme.
 sg.LOOK_AND_FEEL_TABLE['MyNewTheme'] = {'BACKGROUND': '#7d7d7d',
                                         'TEXT': '#ffffff',
                                         'INPUT': '#545454',
@@ -12,9 +13,9 @@ sg.LOOK_AND_FEEL_TABLE['MyNewTheme'] = {'BACKGROUND': '#7d7d7d',
                                         'BORDER': 1, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0,
                                         }
 
-sg.theme('MyNewTheme')   # Add a little color to your windows
+sg.theme('MyNewTheme')   # Set Theme For Window
 
-# All the stuff inside your window. This is the PSG magic code compactor...
+# Make The Contents Of The Window.
 layout = [  [sg.Text('What do you want to decrypt?')],
             [sg.Text('Enter Encrypted Message Here.'), sg.Multiline()],
             [sg.Text('Enter Key Here.'), sg.Multiline()],
@@ -35,12 +36,12 @@ while True:
     if event in ('OK'):
         break
 
-#closes window
-print('You entered', values[0])
-print('You entered', values[1])
+# Closes Window
+#print('You entered', values[0])
+#print('You entered', values[1])
 window.close()
 
-#encrypts string
+# Encrypts String
 b = bytes(values[0], ('utf-8'))
 a = bytes(values[1], ('utf-8'))
 key = a
@@ -49,9 +50,9 @@ encryption_type = Fernet(key)
 decrypted_message = encryption_type.decrypt(b)
 DMSG = decrypted_message
 DMSG2 = (DMSG.decode('utf-8'))
-print(DMSG2)
+#print(DMSG2)
 
-# make the contents of the box.
+# Make The Contents Of The Box.
 msgsa = [ [sg.Text('Decrypted message:')],
       [sg.Text(' ')],
           [sg.Text(DMSG2)],
@@ -61,13 +62,23 @@ msgsa = [ [sg.Text('Decrypted message:')],
 
 os.system('echo %s | clip ' % DMSG2)
 
-# make the box
+# Make The Box
 windows = sg.Window('Finished Decryption', msgsa)
 
-# button check loop
+#Button Check Loop
 while True:             
     event, values = windows.read()
     if event in (sg.WIN_CLOSED, 'Exit'):
+        break
+
+count = 0
+
+while True:
+    count = count+1
+    print('\n')
+    if count == 40:
+        print('Crypto Talk (C) RealFX, 2020-2021')
+        print('All Rights Reserved.')
         break
 
 windows.close()

@@ -1,6 +1,7 @@
 import os
 import PySimpleGUI as sg
 from cryptography.fernet import Fernet
+from random import randint
 
 sg.LOOK_AND_FEEL_TABLE['MyNewTheme'] = {'BACKGROUND': '#7d7d7d',
                                         'TEXT': '#ffffff',
@@ -12,7 +13,7 @@ sg.LOOK_AND_FEEL_TABLE['MyNewTheme'] = {'BACKGROUND': '#7d7d7d',
                                         'BORDER': 1, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0,
                                         }
 
-sg.theme('MyNewTheme')   # Add a little color to your windows Topanga
+sg.theme('MyNewTheme')   # Add a little color to your windows
 
 # All the stuff inside your window. This is the PSG magic code compactor...
 layout = [  [sg.Text('What do you want to encrypt?')],
@@ -35,7 +36,7 @@ while True:
         break
 
 #closes window
-print('You entered', values[0])
+#print('You entered', values[0])
 window.close()
 
 #encrypts string
@@ -49,19 +50,19 @@ decrypted_message = encryption_type.decrypt(encrypted_message)
 DMSG = decrypted_message
 KEY2 = (key.decode('utf-8'))
 EMSG2 = (EMSG.decode('utf-8'))
-print(EMSG2)
-print(KEY2)
-print("%s - %s" % (EMSG2,KEY2))
+#print(EMSG2)
+#print(KEY2)
+#print("%s - %s" % (EMSG2,KEY2))
 EKEY = "Encrypted Message: %s Key: %s" % (EMSG2,KEY2)
 
 # make the contents of the box.
-msgsa = [ [sg.Text('Encrypted message:')],
-          [sg.Text(EMSG2)],
-          [sg.Text(KEY2)],
-          [sg.Text(' ')],
-          [sg.Text('Message also copied to clipboard.')],
-          [sg.Text(' ')],
-          [sg.Exit(),]]
+msgsa = [  [sg.Text('Encrypted Message:'), sg.Text(EMSG2)],
+           [sg.Text('Key:'), sg.Text(KEY2)],
+           [sg.Text(' ')],
+           [sg.Text('Message has also copied to clipboard.')],
+           [sg.Text(' ')],
+           [sg.Exit(),]]
+
 
 os.system('echo %s | clip ' % EKEY)
 
@@ -74,4 +75,13 @@ while True:
     if event in (sg.WIN_CLOSED, 'Exit'):
         break
 
+count = 0
+
+while True:
+    count = count+1
+    print('\n')
+    if count == 40:
+        print('Crypto Talk (C) RealFX, 2020-2021')
+        print('All Rights Reserved.')
+        break
 windows.close()
