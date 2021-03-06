@@ -23,4 +23,9 @@ Python Cryptography 3.1.1 (pip install cryptography)
 pysimplegui (pip install pysimplegui)
 
 
+**Known Issues**
+
+This app does not work with python 3.9, please downgrade to 3.8, or 3.7 to use this app properly.
+
+
 Copyright RealFX 2020
